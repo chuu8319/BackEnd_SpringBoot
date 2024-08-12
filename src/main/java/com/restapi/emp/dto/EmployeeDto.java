@@ -1,5 +1,10 @@
 package com.restapi.emp.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,9 +15,19 @@ import lombok.Setter;
 //@AllArgsConstructor
 public class EmployeeDto {
     private Long id;
+
+    @NotEmpty(message = "firstName은 필수입력 항목입니다.")
     private String firstName;
+
+    @NotEmpty// (message = "lastName은 필수입력 항목입니다.")
     private String lastName;
+
+    @NotBlank(message =  "email은 필수입력 항목입니다.")
+    @Email
     private String email;
+
+    // 숫자는 @NotBlank, @NotEmpty 가 안됨
+    @Digits(message = "departmentId는 필수입력 항목입니다.", integer = 3, fraction = 0)
     private Long departmentId;
 
     private DepartmentDto departmentDto;
